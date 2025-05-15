@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Godrej MSR City - Premium Real Estate Landing Page</title>
+  <link rel="stylesheet" href="./src/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="font-['Poppins']">
+  <!-- Navbar -->
+  <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="flex justify-between items-center py-4">
+        <a href="#" class="font-['Playfair_Display'] text-2xl font-bold text-white">
+          Godrej <span class="text-amber-500">MSR City</span>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#features" class="text-white hover:text-amber-300 transition-colors">Features</a>
+          <a href="#location" class="text-white hover:text-amber-300 transition-colors">Location</a>
+          <a href="#apartments" class="text-white hover:text-amber-300 transition-colors">Apartments</a>
+          <a href="#amenities" class="text-white hover:text-amber-300 transition-colors">Amenities</a>
+          <a href="#contact" class="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-md transition-colors">
+            Contact Us
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-white" id="menuButton">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="md:hidden hidden bg-white mt-4 rounded-lg shadow-lg p-4" id="mobileMenu">
+        <div class="flex flex-col space-y-4">
+          <a href="#features" class="text-gray-800 hover:text-emerald-700">Features</a>
+          <a href="#location" class="text-gray-800 hover:text-emerald-700">Location</a>
+          <a href="#apartments" class="text-gray-800 hover:text-emerald-700">Apartments</a>
+          <a href="#amenities" class="text-gray-800 hover:text-emerald-700">Amenities</a>
+          <a href="#contact" class="px-5 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-md text-center">
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="relative h-screen">
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')">
+      <div class="absolute inset-0 bg-gradient-to-r from-emerald-900/80 to-black/70"></div>
+    </div>
+
+    <div class="relative container mx-auto h-full flex flex-col justify-center px-4 md:px-6">
+      <div class="max-w-3xl animate-fadeIn">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-['Playfair_Display'] font-bold text-white leading-tight mb-4">
+          Welcome to <span class="text-amber-400">Godrej MSR City</span>
+        </h1>
+        <h2 class="text-xl md:text-2xl text-white/90 font-light mb-8">
+          Your Dream Home in North Bangalore
+        </h2>
+        <p class="text-white/80 text-lg md:text-xl mb-10 max-w-2xl">
+          Discover ultra-luxury living in a sprawling 62-acre premium residential 
+          township, just minutes away from Kempegowda International Airport.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-8 rounded-md transition-colors text-center">
+            Book Site Visit
+          </a>
+          <a href="#apartments" class="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/30 font-medium py-3 px-8 rounded-md transition-colors text-center">
+            View Apartments
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-20 bg-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-800 mb-4">Why Choose Godrej MSR City?</h2>
+        <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="p-6 bg-white rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-duration-300">
+          <div class="flex items-start">
+            <div class="mr-4 p-3 bg-emerald-50 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-['Playfair_Display'] font-semibold text-gray-800 mb-2">Prime Location</h3>
+              <p class="text-gray-600">Strategically situated near the airport on Shettigere Road, with excellent connectivity.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 bg-white rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-duration-300">
+          <div class="flex items-start">
+            <div class="mr-4 p-3 bg-emerald-50 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-['Playfair_Display'] font-semibold text-gray-800 mb-2">Spacious Apartments</h3>
+              <p class="text-gray-600">Choose from thoughtfully designed 1, 2, and 3 BHK homes with premium finishes.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 bg-white rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-duration-300">
+          <div class="flex items-start">
+            <div class="mr-4 p-3 bg-emerald-50 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xl font-['Playfair_Display'] font-semibold text-gray-800 mb-2">World-Class Amenities</h3>
+              <p class="text-gray-600">Five clubhouses, swimming pools, gyms, and extensive green spaces.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Highlights -->
+  <section class="py-20 bg-emerald-50">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-800 mb-4">Project Highlights</h2>
+        <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+      </div>
+      
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          <div class="p-6 border-b md:border-r border-gray-100">
+            <h3 class="text-sm uppercase tracking-wider text-gray-500 font-medium mb-1">Location</h3>
+            <p class="text-xl font-['Playfair_Display'] font-semibold text-emerald-800">Shettigere, Devanahalli</p>
+          </div>
+          
+          <div class="p-6 border-b md:border-r border-gray-100">
+            <h3 class="text-sm uppercase tracking-wider text-gray-500 font-medium mb-1">Total Area</h3>
+            <p class="text-xl font-['Playfair_Display'] font-semibold text-emerald-800">62 Acres</p>
+          </div>
+          
+          <div class="p-6 border-b lg:border-b-0 md:border-r border-gray-100">
+            <h3 class="text-sm uppercase tracking-wider text-gray-500 font-medium mb-1">Price Range</h3>
+            <p class="text-xl font-['Playfair_Display'] font-semibold text-emerald-800">₹60L - ₹1.5Cr</p>
+          </div>
+          
+          <div class="p-6">
+            <h3 class="text-sm uppercase tracking-wider text-gray-500 font-medium mb-1">Possession</h3>
+            <p class="text-xl font-['Playfair_Display'] font-semibold text-emerald-800">2029-2030</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section id="location" class="py-20 bg-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="flex flex-col lg:flex-row gap-12 items-center">
+        <div class="lg:w-1/2">
+          <h2 class="text-3xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-800 mb-4">Strategic Location</h2>
+          <div class="w-20 h-1 bg-amber-500 mb-8"></div>
+          
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-gray-800 font-medium">Kempegowda International Airport</span>
+              <span class="text-emerald-700 font-semibold">10 mins</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-gray-800 font-medium">Aerospace SEZ</span>
+              <span class="text-emerald-700 font-semibold">15 mins</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-gray-800 font-medium">Devanahalli Business Park</span>
+              <span class="text-emerald-700 font-semibold">20 mins</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="lg:w-1/2">
+          <img 
+            src="https://images.pexels.com/photos/4350631/pexels-photo-4350631.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+            alt="Location Map" 
+            class="rounded-lg shadow-xl w-full"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Apartments Section -->
+  <section id="apartments" class="py-20 bg-emerald-50">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-800 mb-4">Luxury Apartments</h2>
+        <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <img 
+            src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+            alt="1 BHK Apartment" 
+            class="w-full h-48 object-cover"
+          >
+          <div class="p-6">
+            <h3 class="text-2xl font-['Playfair_Display'] font-bold text-gray-800 mb-2">1 BHK</h3>
+            <div class="flex justify-between mb-4">
+              <span class="text-gray-600">786 sq.ft.</span>
+              <span class="text-emerald-700 font-semibold">₹60L Onwards</span>
+            </div>
+            <a href="#contact" class="block w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 rounded-md transition-colors">
+              Get Details
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <img 
+            src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+            alt="2 BHK Apartment" 
+            class="w-full h-48 object-cover"
+          >
+          <div class="p-6">
+            <h3 class="text-2xl font-['Playfair_Display'] font-bold text-gray-800 mb-2">2 BHK</h3>
+            <div class="flex justify-between mb-4">
+              <span class="text-gray-600">986 sq.ft.</span>
+              <span class="text-emerald-700 font-semibold">₹85L Onwards</span>
+            </div>
+            <a href="#contact" class="block w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 rounded-md transition-colors">
+              Get Details
+            </a>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+          <img 
+            src="https://images.pexels.com/photos/1571468/pexels-photo-1571468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+            alt="3 BHK Apartment" 
+            class="w-full h-48 object-cover"
+          >
+          <div class="p-6">
+            <h3 class="text-2xl font-['Playfair_Display'] font-bold text-gray-800 mb-2">3 BHK</h3>
+            <div class="flex justify-between mb-4">
+              <span class="text-gray-600">1186 sq.ft.</span>
+              <span class="text-emerald-700 font-semibold">₹1.2Cr Onwards</span>
+            </div>
+            <a href="#contact" class="block w-full text-center bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 rounded-md transition-colors">
+              Get Details
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Amenities Section -->
+  <section id="amenities" class="py-20 bg-white">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-['Playfair_Display'] font-bold text-gray-800 mb-4">World-Class Amenities</h2>
+        <div class="w-20 h-1 bg-amber-500 mx-auto"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow border border-gray-100 text-center">
+          <div class="flex justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-['Playfair_Display'] font-semibold text-gray-800 mb-2">Swimming Pools</h3>
+          <p class="text-gray-600">Adult & kids pools with premium lounging areas</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow border border-gray-100 text-center">
+          <div class="flex justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-['Playfair_Display'] font-semibold text-gray-800 mb-2">Fitness Centers</h3>
+          <p class="text-gray-600">State-of-the-art gyms with modern equipment</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow border border-gray-100 text-center">
+          <div class="flex justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-['Playfair_Display'] font-semibold text-gray-800 mb-2">Clubhouses</h3>
+          <p class="text-gray-600">Five clubhouses with various entertainment options</p>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow border border-gray-100 text-center">
+          <div class="flex justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-['Playfair_Display'] font-semibold text-gray-800 mb-2">Parks & Gardens</h3>
+          <p class="text-gray-600">Beautifully landscaped green spaces</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section id="contact" class="py-20 bg-emerald-50">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="bg-white rounded-lg shadow-xl overflow-hidden">
+        <div class="flex flex-col lg:flex-row">
+          <div class="lg:w-1/2 bg-emerald-800 p-8 lg:p-12 text-white relative">
+            <div class="relative z-10">
+              <h2 class="text-3xl font-['Playfair_Display'] font-bold mb-6">Book Your Dream Home Today!</h2>
+              <p class="mb-8 text-white/80">
+                Don't miss the opportunity to invest in one of Bangalore's most promising 
+                residential projects. Our team is ready to assist you!
+              </p>
+              
+              <div class="space-y-6">
+                <div class="flex items-start">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-400 mr-3 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <div>
+                    <h3 class="font-medium text-amber-400">Address</h3>
+                    <p class="text-white/80">Shettigere Road, Devanahalli, North Bangalore</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-400 mr-3 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <div>
+                    <h3 class="font-medium text-amber-400">Phone</h3>
+                    <p class="text-white/80">+91 XXXXX XXXXX</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="lg:w-1/2 p-8 lg:p-12">
+            <h3 class="text-2xl font-['Playfair_Display'] font-bold text-gray-800 mb-6">Get in Touch</h3>
+            
+            <form id="contactForm" class="space-y-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name*</label>
+                <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Your full name">
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email*</label>
+                  <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Your email address">
+                </div>
+                
+                <div>
+                  <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number*</label>
+                  <input type="tel" id="phone" name="phone" required class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Your contact number">
+                </div>
+              </div>
+              
+              <div>
+                <label for="interest" class="block text-sm font-medium text-gray-700 mb-1">Interested In</label>
+                <select id="interest" name="interest" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500">
+                  <option value="">Select your interest</option>
+                  <option value="1 BHK">1 BHK</option>
+                  <option value="2 BHK">2 BHK</option>
+                  <option value="3 BHK">3 BHK</option>
+                  <option value="Site Visit">Schedule a Site Visit</option>
+                </select>
+              </div>
+              
+              <div>
+                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message (Optional)</label>
+                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" placeholder="Any specific requirements or questions..."></textarea>
+              </div>
+              
+              <div>
+                <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-6 rounded-md transition-colors">
+                  Send Inquiry
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div>
+          <h3 class="text-2xl font-['Playfair_Display'] font-bold mb-4">
+            Godrej <span class="text-amber-500">MSR City</span>
+          </h3>
+          <p class="text-gray-400 mb-6">
+            A 62-acre premium residential township in North Bangalore 
+            offering luxury living close to the airport.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+          <ul class="space-y-2">
+            <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+            <li><a href="#location" class="text-gray-400 hover:text-white transition-colors">Location</a></li>
+            <li><a href="#apartments" class="text-gray-400 hover:text-white transition-colors">Apartments</a></li>
+            <li><a href="#amenities" class="text-gray-400 hover:text-white transition-colors">Amenities</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold mb-4">Contact</h4>
+          <ul class="space-y-2">
+            <li class="text-gray-400">Shettigere Road, Devanahalli</li>
+            <li class="text-gray-400">North Bangalore, Karnataka</li>
+            <li class="text-gray-400">+91 XXXXX XXXXX</li>
+            <li class="text-gray-400">info@godrejmsrcity.com</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold mb-4">Legal</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms & Conditions</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">RERA Registration</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+        <p class="text-gray-400">
+          &copy; 2024 Godrej MSR City. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./src/main.js"></script>
+</body>
+</html>
