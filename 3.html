@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Properties | Luxury Real Estate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS for transitions and animations */
+        .page-transition {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .page-transition.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .property-card:hover .property-image {
+            transform: scale(1.05);
+        }
+        
+        .property-image {
+            transition: transform 0.3s ease;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 500px;
+        }
+        
+        .testimonial-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .active-nav::after {
+            width: 100%;
+        }
+        
+        /* Mobile menu animation */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .mobile-menu.open {
+            max-height: 500px;
+        }
+        
+        /* Ensure all images are visible */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Fix for map iframe */
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: 0;
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <i class="fas fa-home text-blue-500 text-3xl mr-2"></i>
+                    <span class="text-xl font-bold text-gray-800">Prime Properties</span>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-link active-nav text-gray-800 font-medium" onclick="showPage('home')">Home</a>
+                    <a href="#" class="nav-link text-gray-600 hover:text-gray-800 font-medium" onclick="showPage('properties')">Properties</a>
+                    <a href="#" class="nav-link text-gray-600 hover:text-gray-800 font-medium" onclick="showPage('about')">About Us</a>
+                    <a href="#" class="nav-link text-gray-600 hover:text-gray-800 font-medium" onclick="showPage('contact')">Contact</a>
+                </div>
+                
+                <div class="hidden md:block">
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300">
+                        <i class="fas fa-phone-alt mr-2"></i> Call Us
+                    </button>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-800 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="px-2 pt-2 pb-4 space-y-1">
+                    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" onclick="showPage('home'); toggleMobileMenu()">Home</a>
+                    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" onclick="showPage('properties'); toggleMobileMenu()">Properties</a>
+                    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" onclick="showPage('about'); toggleMobileMenu()">About Us</a>
+                    <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50" onclick="showPage('contact'); toggleMobileMenu()">Contact</a>
+                    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300 mt-2">
+                        <i class="fas fa-phone-alt mr-2"></i> Call Us
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <main>
+        <!-- Home Page -->
+        <div id="home" class="page-transition active">
+            <!-- Hero Section -->
+            <section class="hero text-white py-20 md:py-32 flex items-center">
+                <div class="container mx-auto px-4 text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">Find Your Dream Home</h1>
+                    <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Discover premium properties in the most sought-after locations with our expert guidance.</p>
+                    <div class="flex flex-col md:flex-row justify-center gap-4">
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-medium transition duration-300">
+                            Browse Properties
+                        </button>
+                        <button class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-900 text-white px-8 py-3 rounded-lg text-lg font-medium transition duration-300">
+                            Contact Agent
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Section -->
+            <section class="bg-white py-12 shadow-md -mt-10 mx-4 rounded-lg relative z-10">
+                <div class="container mx-auto px-4">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="relative">
+                            <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>Property Type</option>
+                                <option>House</option>
+                                <option>Apartment</option>
+                                <option>Villa</option>
+                                <option>Commercial</option>
+                            </select>
+                            <i class="fas fa-home absolute right-3 top-4 text-gray-400"></i>
+                        </div>
+                        <div class="relative">
+                            <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>Location</option>
+                                <option>New York</option>
+                                <option>Los Angeles</option>
+                                <option>Chicago</option>
+                                <option>Miami</option>
+                            </select>
+                            <i class="fas fa-map-marker-alt absolute right-3 top-4 text-gray-400"></i>
+                        </div>
+                        <div class="relative">
+                            <select class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>Price Range</option>
+                                <option>$100,000 - $300,000</option>
+                                <option>$300,000 - $500,000</option>
+                                <option>$500,000 - $1,000,000</option>
+                                <option>$1,000,000+</option>
+                            </select>
+                            <i class="fas fa-dollar-sign absolute right-3 top-4 text-gray-400"></i>
+                        </div>
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-lg font-medium transition duration-300">
+                            <i class="fas fa-search mr-2"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Properties -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Featured Properties</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">Explore our handpicked selection of premium properties that match your lifestyle.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Property 1 -->
+                        <div class="property-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="relative overflow-hidden h-64">
+                                <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Luxury Villa" class="property-image w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    For Sale
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-gray-800">Modern Luxury Villa</h3>
+                                    <span class="text-lg font-bold text-blue-500">$1,250,000</span>
+                                </div>
+                                <p class="text-gray-600 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> Beverly Hills, CA</p>
+                                <div class="flex justify-between text-gray-600 border-t border-gray-200 pt-4">
+                                    <span><i class="fas fa-bed text-blue-500 mr-1"></i> 5 Beds</span>
+                                    <span><i class="fas fa-bath text-blue-500 mr-1"></i> 4 Baths</span>
+                                    <span><i class="fas fa-vector-square text-blue-500 mr-1"></i> 3,500 sq.ft</span>
+                                </div>
+                                <button class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Property 2 -->
+                        <div class="property-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="relative overflow-hidden h-64">
+                                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Downtown Apartment" class="property-image w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    For Rent
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-gray-800">Downtown Apartment</h3>
+                                    <span class="text-lg font-bold text-blue-500">$3,500/mo</span>
+                                </div>
+                                <p class="text-gray-600 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> Manhattan, NY</p>
+                                <div class="flex justify-between text-gray-600 border-t border-gray-200 pt-4">
+                                    <span><i class="fas fa-bed text-blue-500 mr-1"></i> 2 Beds</span>
+                                    <span><i class="fas fa-bath text-blue-500 mr-1"></i> 2 Baths</span>
+                                    <span><i class="fas fa-vector-square text-blue-500 mr-1"></i> 1,200 sq.ft</span>
+                                </div>
+                                <button class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Property 3 -->
+                        <div class="property-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="relative overflow-hidden h-64">
+                                <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Waterfront Mansion" class="property-image w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    For Sale
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-gray-800">Waterfront Mansion</h3>
+                                    <span class="text-lg font-bold text-blue-500">$4,750,000</span>
+                                </div>
+                                <p class="text-gray-600 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> Miami Beach, FL</p>
+                                <div class="flex justify-between text-gray-600 border-t border-gray-200 pt-4">
+                                    <span><i class="fas fa-bed text-blue-500 mr-1"></i> 6 Beds</span>
+                                    <span><i class="fas fa-bath text-blue-500 mr-1"></i> 5.5 Baths</span>
+                                    <span><i class="fas fa-vector-square text-blue-500 mr-1"></i> 6,800 sq.ft</span>
+                                </div>
+                                <button class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-12">
+                        <button class="bg-white border-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white px-8 py-3 rounded-lg text-lg font-medium transition duration-300">
+                            View All Properties
+                        </button>
+                    </div>
+                    </div>
+            </section>
+
+            <!-- Why Choose Us -->
+            <section class="py-16 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Why Choose Prime Properties</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">We go above and beyond to ensure your real estate experience is exceptional.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-shield-alt text-blue-500 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Trusted Expertise</h3>
+                            <p class="text-gray-600">With over 15 years in the industry, our team provides unmatched market knowledge and negotiation skills.</p>
+                        </div>
+                        
+                        <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-search-dollar text-blue-500 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Exclusive Listings</h3>
+                            <p class="text-gray-600">Access to premium properties not available on the open market through our extensive network.</p>
+                        </div>
+                        
+                        <div class="text-center p-6 rounded-lg hover:bg-gray-50 transition duration-300">
+                            <div class="bg-blue-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                                <i class="fas fa-hand-holding-heart text-blue-500 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Personalized Service</h3>
+                            <p class="text-gray-600">Tailored solutions that match your unique needs, from first-time buyers to luxury investors.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section class="py-16 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4">What Our Clients Say</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">Hear from our satisfied clients about their experiences with Prime Properties.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="testimonial-card bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center mb-4">
+                                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah Johnson" class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Sarah Johnson</h4>
+                                    <p class="text-gray-600 text-sm">Home Buyer</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4">"Prime Properties made finding our dream home effortless. Their attention to detail and understanding of our needs was exceptional."</p>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center mb-4">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Michael Chen</h4>
+                                    <p class="text-gray-600 text-sm">Investor</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4">"The team's market insights helped me make profitable investment decisions. Their professionalism is unmatched in the industry."</p>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-card bg-white p-6 rounded-lg shadow-md">
+                            <div class="flex items-center mb-4">
+                                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emily Rodriguez" class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <h4 class="font-bold text-gray-800">Emily Rodriguez</h4>
+                                    <p class="text-gray-600 text-sm">Home Seller</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 mb-4">"I sold my property above asking price in just 2 weeks! Their marketing strategy and negotiation skills delivered outstanding results."</p>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action -->
+            <section class="py-16 bg-blue-600 text-white">
+                <div class="container mx-auto px-4 text-center">
+                    <h2 class="text-3xl font-bold mb-6">Ready to Find Your Dream Property?</h2>
+                    <p class="text-xl mb-8 max-w-2xl mx-auto">Our expert agents are standing by to help you navigate the market and find the perfect home or investment property.</p>
+                    <div class="flex flex-col md:flex-row justify-center gap-4">
+                        <button class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg text-lg font-medium transition duration-300">
+                            <i class="fas fa-phone-alt mr-2"></i> Schedule a Call
+                        </button>
+                        <button class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg text-lg font-medium transition duration-300">
+                            <i class="fas fa-envelope mr-2"></i> Email Us
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Properties Page -->
+        <div id="properties" class="page-transition">
+            <section class="py-12 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <div class="mb-8">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-2">Our Property Listings</h1>
+                        <p class="text-gray-600">Browse through our extensive collection of premium properties</p>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-gray-700">Filter:</span>
+                            <select class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>All Properties</option>
+                                <option>For Sale</option>
+                                <option>For Rent</option>
+                                <option>Commercial</option>
+                            </select>
+                            <select class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>All Locations</option>
+                                <option>New York</option>
+                                <option>Los Angeles</option>
+                                <option>Chicago</option>
+                                <option>Miami</option>
+                            </select>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <span class="text-gray-700">Sort by:</span>
+                            <select class="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option>Newest First</option>
+                                <option>Price: Low to High</option>
+                                <option>Price: High to Low</option>
+                                <option>Square Footage</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Property 1 -->
+                        <div class="property-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="relative overflow-hidden h-64">
+                                <img src="https://images.unsplash.com/photo-1600585152220-90363fe7e115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Suburban Home" class="property-image w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    For Sale
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-gray-800">Suburban Family Home</h3>
+                                    <span class="text-lg font-bold text-blue-500">$675,000</span>
+                                </div>
+                                <p class="text-gray-600 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> Austin, TX</p>
+                                <div class="flex justify-between text-gray-600 border-t border-gray-200 pt-4">
+                                    <span><i class="fas fa-bed text-blue-500 mr-1"></i> 4 Beds</span>
+                                    <span><i class="fas fa-bath text-blue-500 mr-1"></i> 3 Baths</span>
+                                    <span><i class="fas fa-vector-square text-blue-500 mr-1"></i> 2,800 sq.ft</span>
+                                </div>
+                                <button class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Property 2 -->
+                        <div class="property-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="relative overflow-hidden h-64">
+                                <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Luxury Penthouse" class="property-image w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    For Rent
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-gray-800">Luxury Downtown Penthouse</h3>
+                                    <span class="text-lg font-bold text-blue-500">$8,500/mo</span>
+                                </div>
+                                <p class="text-gray-600 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i Chicago, IL</p>
+                                <div class="flex justify-between text-gray-600 border-t border-gray-200 pt-4">
+                                    <span><i class="fas fa-bed text-blue-500 mr-1"></i> 3 Beds</span>
+                                    <span><i class="fas fa-bath text-blue-500 mr-1"></i> 3.5 Baths</span>
+                                    <span><i class="fas fa-vector-square text-blue-500 mr-1"></i> 3,200 sq.ft</span>
+                                </div>
+                                <button class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Property 3 -->
+                        <div class="property-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="relative overflow-hidden h-64">
+                                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Countryside Villa" class="property-image w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    For Sale
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-gray-800">Countryside Villa</h3>
+                                    <span class="text-lg font-bold text-blue-500">$1,950,000</span>
+                                </div>
+                                <p class="text-gray-600 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> Napa Valley, CA</p>
+                                <div class="flex justify-between text-gray-600 border-t border-gray-200 pt-4">
+                                    <span><i class="fas fa-bed text-blue-500 mr-1"></i> 5 Beds</span>
+                                    <span><i class="fas fa-bath text-blue-500 mr-1"></i> 4.5 Baths</span>
+                                    <span><i class="fas fa-vector-square text-blue-500 mr-1"></i> 5,500 sq.ft</span>
+                                </div>
+                                <button class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Property 4 -->
+                        <div class="property-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="relative overflow-hidden h-64">
+                                <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Modern Townhouse" class="property-image w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    For Sale
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-gray-800">Modern Townhouse</h3>
+                                    <span class="text-lg font-bold text-blue-500">$825,000</span>
+                                </div>
+                                <p class="text-gray-600 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> Seattle, WA</p>
+                                <div class="flex justify-between text-gray-600 border-t border-gray-200 pt-4">
+                                    <span><i class="fas fa-bed text-blue-500 mr-1"></i> 3 Beds</span>
+                                    <span><i class="fas fa-bath text-blue-500 mr-1"></i> 2.5 Baths</span>
+                                    <span><i class="fas fa-vector-square text-blue-500 mr-1"></i> 2,200 sq.ft</span>
+                                </div>
+                                <button class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Property 5 -->
+                        <div class="property-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="relative overflow-hidden h-64">
+                                <img src="https://images.unsplash.com/photo-1600566752227-868470e971d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Beachfront Condo" class="property-image w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    For Rent
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-gray-800">Beachfront Condo</h3>
+                                    <span class="text-lg font-bold text-blue-500">$4,200/mo</span>
+                                </div>
+                                <p class="text-gray-600 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> San Diego, CA</p>
+                                <div class="flex justify-between text-gray-600 border-t border-gray-200 pt-4">
+                                    <span><i class="fas fa-bed text-blue-500 mr-1"></i> 2 Beds</span>
+                                    <span><i class="fas fa-bath text-blue-500 mr-1"></i> 2 Baths</span>
+                                    <span><i class="fas fa-vector-square text-blue-500 mr-1"></i> 1,500 sq.ft</span>
+                                </div>
+                                <button class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Property 6 -->
+                        <div class="property-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition duration-300">
+                            <div class="relative overflow-hidden h-64">
+                                <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                     alt="Historic Brownstone" class="property-image w-full h-full object-cover">
+                                <div class="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+                                    For Sale
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="text-xl font-bold text-gray-800">Historic Brownstone</h3>
+                                    <span class="text-lg font-bold text-blue-500">$2,300,000</span>
+                                </div>
+                                <p class="text-gray-600 mb-4"><i class="fas fa-map-marker-alt text-blue-500 mr-2"></i> Boston, MA</p>
+                                <div class="flex justify-between text-gray-600 border-t border-gray-200 pt-4">
+                                    <span><i class="fas fa-bed text-blue-500 mr-1"></i> 4 Beds</span>
+                                    <span><i class="fas fa-bath text-blue-500 mr-1"></i> 3.5 Baths</span>
+                                    <span><i class="fas fa-vector-square text-blue-500 mr-1"></i> 4,200 sq.ft</span>
+                                </div>
+                                <button class="w-full mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg transition duration-300">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 flex justify-center">
+                        <nav class="flex items-center space-x-2">
+                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="px-4 py-2 bg-blue-500 text-white rounded-lg">1</button>
+                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100">2</button>
+                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100">3</button>
+                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100">4</button>
+                            <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Us Page -->
+        <div id="about" class="page-transition">
+            <section class="py-12 bg-white">
+                <div class="container mx-auto px-4">
+                    <div class="mb-12 text-center">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-4">About Prime Properties</h1>
+                        <p class="text-gray-600 max-w-3xl mx-auto">Delivering exceptional real estate services with integrity, expertise, and personalized attention since 2005.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800 mb-6">Our Story</h2>
+                            <p class="text-gray-600 mb-4">Founded in 2005 by real estate veteran John Smith, Prime Properties began as a small boutique firm with a vision to redefine luxury real estate services. What started as a two-person operation has grown into one of the most respected real estate companies in the country.</p>
+                            <p class="text-gray-600 mb-4">Our success stems from our unwavering commitment to client satisfaction, market expertise, and innovative marketing strategies that consistently deliver results beyond expectations.</p>
+                            <p class="text-gray-600">Today, with over 150 agents across 12 offices, we continue to set the standard for excellence in residential and commercial real estate services.</p>
+                        </div>
+                        <div class="rounded-xl overflow-hidden shadow-lg">
+                            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                                 alt="Our Team" class="w-full h-auto">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16 flex-row-reverse">
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-800 mb-6">Our Mission</h2>
+                            <p class="text-gray-600 mb-4">At Prime Properties, our mission is to empower our clients to make informed real estate decisions through expert guidance, transparent communication, and innovative solutions.</p>
+                            <p class="text-gray-600">We believe that buying or selling a property should be an exciting, rewarding experience, not a stressful one. That's why we've built a team of professionals who go above and beyond to ensure every client receives personalized attention and achieves their real estate goals.</p>
+                            <div class="mt-6">
+                                <div class="flex items-center mb-3">
+                                    <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-check text-blue-500"></i>
+                                    </div>
+                                    <span class="text-gray-700 font-medium">Integrity in all our dealings</span>
+                                </div>
+                                <div class="flex items-center mb-3">
+                                    <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-check text-blue-500"></i>
+                                    </div>
+                                    <span class="text-gray-700 font-medium">Unmatched market knowledge</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="bg-blue-100 w-10 h-10 rounded-full flex items-center justify-center mr-4">
+                                        <i class="fas fa-check text-blue-500"></i>
+                                    </div>
+                                    <span class="text-gray-700 font-medium">Client-focused approach</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rounded-xl overflow-hidden shadow-lg">
+                            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" 
+                                 alt="Our Mission" class="w-full h-auto">
+                        </div>
+                    </div>
+                    
+                    <div class="mb-16">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">Our Team</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition duration-300">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">Sarah Johnson</h3>
+                                <p class="text-blue-500 font-medium mb-3">Founder & CEO</p>
+                                <p class="text-gray-600 mb-4">With over 25 years in the industry, Sarah leads our company with vision and dedication to excellence.</p>
+                                <div class="flex justify-center space-x-3">
+                                    <a href="#" class="text-gray-500 hover:text-blue-500"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" class="text-gray-500 hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="text-gray-500 hover:text-blue-500"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition duration-300">
+                                <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Michael Chen" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">Michael Chen</h3>
+                                <p class="text-blue-500 font-medium mb-3">Director of Sales</p>
+                                <p class="text-gray-600 mb-4">Michael's strategic approach and negotiation skills have helped hundreds of clients achieve their real estate goals.</p>
+                                <div class="flex justify-center space-x-3">
+                                    <a href="#" class="text-gray-500 hover:text-blue-500"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" class="text-gray-500 hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="text-gray-500 hover:text-blue-500"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-xl shadow-md text-center hover:shadow-xl transition duration-300">
+                                <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Emily Rodriguez" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                                <h3 class="text-xl font-bold text-gray-800 mb-1">Emily Rodriguez</h3>
+                                <p class="text-blue-500 font-medium mb-3">Head of Marketing</p>
+                                <p class="text-gray-600 mb-4">Emily's innovative marketing strategies ensure our listings receive maximum exposure in the market.</p>
+                                <div class="flex justify-center space-x-3">
+                                    <a href="#" class="text-gray-500 hover:text-blue-500"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" class="text-gray-500 hover:text-blue-500"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" class="text-gray-500 hover:text-blue-500"><i class="fas fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-8 rounded-xl">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Our Achievements</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="text-4xl font-bold text-blue-500 mb-2">1,250+</div>
+                                <div class="text-gray-600">Properties Sold</div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="text-4xl font-bold text-blue-500 mb-2">$2.5B+</div>
+                                <div class="text-gray-600">Total Sales Volume</div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="text-4xl font-bold text-blue-500 mb-2">98%</div>
+                                <div class="text-gray-600">Client Satisfaction</div>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="text-4xl font-bold text-blue-500 mb-2">15+</div>
+                                <div class="text-gray-600">Years in Business</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div id="contact" class="page-transition">
+            <section class="py-12 bg-gray-50">
+                <div class="container mx-auto px-4">
+                    <div class="mb-12 text-center">
+                        <h1 class="text-3xl font-bold text-gray-800 mb-4">Contact Us</h1>
+                        <p class="text-gray-600 max-w-2xl mx-auto">We're here to help with all your real estate needs. Reach out to us today and one of our expert agents will get back to you promptly.</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div>
+                            <div class="bg-white p-8 rounded-xl shadow-md">
+                                <h2 class="text-2xl font-bold text-gray-800 mb-6">Send Us a Message</h2>
+                                <form>
+                                    <div class="mb-4">
+                                        <label for="name" class="block text-gray-700 font-medium mb-2">Your Name</label>
+                                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="email" class="block text-gray-700 font-medium mb-2">Email Address</label>
+                                        <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="phone" class="block text-gray-700 font-medium mb-2">Phone Number</label>
+                                        <input type="tel" id="phone" class="极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极客时间极
+</html>
